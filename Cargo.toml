@@ -1,0 +1,30 @@
+[package]
+name = "doff"
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+edition = "2024"
+#rust-version = "1.95"
+readme = "README.md"
+publish = false
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = [ "derive", "wrap_help", "unicode" ] }
+dioxus = { version = "0.7", features = ["desktop"] }
+env_logger = "0.11"
+image = { version = "0.25", default-features = false, features = [ "png" ] }
+log = "0.4"
+rfd = "0.17"
+similar = { version = "3.1", features = ["inline"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "fs"] }
+
+[profile.dev]
+debug = "limited"
+panic = "abort"
+
+[profile.release]
+lto = "fat"
+panic = "abort"
+overflow-checks = true
+opt-level = "z"
+strip = "symbols"
